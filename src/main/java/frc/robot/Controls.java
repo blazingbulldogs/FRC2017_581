@@ -9,7 +9,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.pneumatics.MoveDoubleSolenoid;
+// import frc.robot.commands.pneumatics.MoveDoubleSolenoid;
 import frc.robot.util.Config;
 import frc.robot.util.controls.ports.Buttons;
 
@@ -45,16 +45,17 @@ public final class Controls {
   private final JoystickButton bButton = new JoystickButton(driveJoystick, Buttons.b);
 
   public Controls() {
-    aButton.whenPressed(new MoveDoubleSolenoid(Robot.pneumaticsSubsystem.solenoid, Value.kForward));
-    aButton.whenReleased(new MoveDoubleSolenoid(Robot.pneumaticsSubsystem.solenoid, Value.kReverse));
+    // aButton.whenPressed(new MoveDoubleSolenoid(Robot.pneumaticsSubsystem.solenoid, Value.kForward));
+    // aButton.whenReleased(new MoveDoubleSolenoid(Robot.pneumaticsSubsystem.solenoid, Value.kReverse));
 
-    bButton.whenPressed(new MoveDoubleSolenoid(Robot.pneumaticsSubsystem.solenoid, Value.kOff));
+    // bButton.whenPressed(new MoveDoubleSolenoid(Robot.pneumaticsSubsystem.solenoid, Value.kOff));
   }
 
   /**
    * Scales a value to be more precise at lower values.
    * @return Scaled value
    */
+
   public static double scale(double value) {
     return Math.copySign(Math.pow(value, Config.joystickValueExponent), value);
   }

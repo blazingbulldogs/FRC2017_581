@@ -44,8 +44,7 @@ public class MotorSubsystem extends Subsystem {
   public final DifferentialDrive drive = new DifferentialDrive(leftMotorControllers, rightMotorControllers);
 
   public MotorSubsystem() {
-    ShuffleboardUtil
-      .tab
+    ShuffleboardUtil.tab
         .add("Differential Drive Train", drive)
         .withSize(4, 2)
         .withPosition(0, 0)

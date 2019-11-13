@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.robot.commands.pneumatics.MoveDoubleSolenoid;
+// import frc.robot.commands.pneumatics.MoveDoubleSolenoid;
 import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.util.Config;
@@ -27,7 +27,7 @@ import frc.robot.util.ShuffleboardUtil;
  */
 public class Robot extends TimedRobot {
   public static final MotorSubsystem motorSubsystem = new MotorSubsystem();
-  public static PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
+  // public static PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
   public static final Controls operatorInput = new Controls();
   public static final ShuffleboardUtil shuffleBoardUtil = new ShuffleboardUtil();
 
@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.println("Hello from " + Config.id);
 
-    chooser.setDefaultOption("Default Auto", new MoveDoubleSolenoid(pneumaticsSubsystem.solenoid, DoubleSolenoid.Value.kForward));
+    // chooser.setDefaultOption("Default Auto", new MoveDoubleSolenoid(pneumaticsSubsystem.solenoid, DoubleSolenoid.Value.kForward));
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
@@ -114,12 +114,18 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
+    System.out.print("AXIS X: " + Config.preferredDrivingJoystick.xAxis + "\n");
+    System.out.print("AXIS y: " + Config.preferredDrivingJoystick.yAxis + "\n");
+
     final double x = Controls.driveJoystick.getRawAxis(Config.preferredDrivingJoystick.xAxis);
     final double y = Controls.driveJoystick.getRawAxis(Config.preferredDrivingJoystick.yAxis);
+    // final double x = Controls.driveJoystick.getRawAxis(0);
+    // final double y = Controls.driveJoystick.getRawAxis(1);
 
     shuffleBoardUtil.logJoystickValues(x, y);
 
-    motorSubsystem.drive.arcadeDrive(Controls.scale(y), Controls.scale(x), false);
+    // motorSubsystem.drive.arcadeDrive(Controls.scale(y), Controls.scale(x), false);
+    motorSubsystem.drive.arcadeDrive(y, x, false);
   }
 
   @Override

@@ -37,11 +37,11 @@ public class MotorSubsystem extends Subsystem {
   public final MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
   public MotorSubsystem() {
-    ShuffleboardUtil.tab
-        .add("Mecanum Drive Train", drive)
-        .withSize(4, 2)
-        .withPosition(0, 0)
-        .withWidget(BuiltInWidgets.kMecanumDrive);
+    ShuffleboardUtil
+      .tab.add("Mecanum Drive Train", drive)
+      .withSize(4, 2)
+      .withPosition(0, 0)
+      .withWidget(BuiltInWidgets.kMecanumDrive);
   }
 
   // Put methods for controlling this subsystem
@@ -49,6 +49,6 @@ public class MotorSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  // setDefaultCommand(new MySpecialCommand());
   }
 }

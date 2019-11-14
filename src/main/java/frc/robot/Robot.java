@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
     System.out.println("Robot ID: " + Config.id);
 
     // Log to Shuffleboard
-    ShuffleboardUtil.tab.add("Robot ID", Config.id).withPosition(0, 6).withWidget(BuiltInWidgets.kTextView);
+      ShuffleboardUtil.tab.add("Robot ID", Config.id).withPosition(0, 6).withWidget(BuiltInWidgets.kTextView);
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);

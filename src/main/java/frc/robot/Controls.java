@@ -41,14 +41,12 @@ public final class Controls {
   public static final Joystick driveJoystick = new Joystick(RobotMap.controllerPort);
   private final JoystickButton aButton = new JoystickButton(driveJoystick, Buttons.a);
 
-  public Controls() {
-  }
+  public Controls() {}
 
   /**
    * Scales a value to be more precise at lower values.
    * @return Scaled value
    */
-
   public static double scale(double value) {
     return Math.copySign(Math.pow(value, Config.joystickValueExponent), value);
   }

@@ -17,6 +17,7 @@ import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.util.Config;
 import frc.robot.util.ShuffleboardUtil;
+import frc.robot.util.controls.ports.joysticks.RightJoystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -119,13 +120,14 @@ public class Robot extends TimedRobot {
 
     final double x = Controls.driveJoystick.getRawAxis(Config.preferredDrivingJoystick.xAxis);
     final double y = Controls.driveJoystick.getRawAxis(Config.preferredDrivingJoystick.yAxis);
+    final double z = Controls.driveJoystick.getRawAxis(RightJoystick.xAxis);
     // final double x = Controls.driveJoystick.getRawAxis(0);
     // final double y = Controls.driveJoystick.getRawAxis(1);
 
     shuffleBoardUtil.logJoystickValues(x, y);
 
     // motorSubsystem.drive.arcadeDrive(Controls.scale(y), Controls.scale(x), false);
-    motorSubsystem.drive.arcadeDrive(y, x, false);
+    motorSubsystem.drive.driveCartesian(x, -y, z);
   }
 
   @Override

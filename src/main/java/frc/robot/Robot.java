@@ -8,16 +8,16 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
-// import frc.robot.commands.pneumatics.MoveDoubleSolenoid;
+import frc.robot.Controls;
 import frc.robot.subsystems.MotorSubsystem;
-import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.util.Config;
-import frc.robot.util.ShuffleboardUtil;
+import frc.robot.util.controls.ports.joysticks.LeftJoystick;
 import frc.robot.util.controls.ports.joysticks.RightJoystick;
+import frc.robot.util.ShuffleboardUtil;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,9 +28,10 @@ import frc.robot.util.controls.ports.joysticks.RightJoystick;
  */
 public class Robot extends TimedRobot {
   public static final MotorSubsystem motorSubsystem = new MotorSubsystem();
+
   // public static PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
   public static final Controls operatorInput = new Controls();
-  public static final ShuffleboardUtil shuffleBoardUtil = new ShuffleboardUtil();
+  public static final ShuffleboardUtil shuffleboardUtil = new ShuffleboardUtil();
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -41,9 +42,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    System.out.println("Hello from " + Config.id);
+    // Hopefully we never have to use this console output, but just in case...
+    System.out.println("Robot ID: " + Config.id);
 
-    // chooser.setDefaultOption("Default Auto", new MoveDoubleSolenoid(pneumaticsSubsystem.solenoid, DoubleSolenoid.Value.kForward));
+    // Log to Shuffleboard
+    ShuffleboardUtil.tab.add("Robot ID", Config.id).withPosition(0, 6).withWidget(BuiltInWidgets.kTextView);
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
@@ -115,19 +118,18 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
-    System.out.print("AXIS X: " + Config.preferredDrivingJoystick.xAxis + "\n");
-    System.out.print("AXIS y: " + Config.preferredDrivingJoystick.yAxis + "\n");
+    /** Raw `x` value from the joystick. */
+    final double x = Controls.driveJoystick.getRawAxis(RightJoystick.xAxis);
 
-    final double x = Controls.driveJoystick.getRawAxis(Config.preferredDrivingJoystick.xAxis);
-    final double y = Controls.driveJoystick.getRawAxis(Config.preferredDrivingJoystick.yAxis);
-    final double z = Controls.driveJoystick.getRawAxis(RightJoystick.xAxis);
-    // final double x = Controls.driveJoystick.getRawAxis(0);
-    // final double y = Controls.driveJoystick.getRawAxis(1);
+    /** Negative `y` value from the joystick. */
+    final double y = -Controls.driveJoystick.getRawAxis(RightJoystick.yAxis);
 
-    shuffleBoardUtil.logJoystickValues(x, y);
+    /** Raw `z` value from the joystick. */
+    final double z = Controls.driveJoystick.getRawAxis(LeftJoystick.xAxis);
 
-    // motorSubsystem.drive.arcadeDrive(Controls.scale(y), Controls.scale(x), false);
-    motorSubsystem.drive.driveCartesian(x, -y, z);
+    shuffleboardUtil.logJoystickValues(x, y, z);
+
+    motorSubsystem.drive.driveCartesian(Controls.scale(x), Controls.scale(-y), Controls.scale(z));
   }
 
   @Override

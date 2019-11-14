@@ -7,11 +7,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
 import frc.robot.util.ShuffleboardUtil;
 
@@ -32,12 +30,6 @@ public class MotorSubsystem extends Subsystem {
   /** The Spark motor controller for the back right side of the robot. */
   private final Spark backRight = new Spark(RobotMap.backRightSparkPort);
 
-  /** Speed controller group for the motor controllers on the left. */
-  // private final SpeedControllerGroup leftMotorControllers = new SpeedControllerGroup(frontLeft, backLeft);
-
-  // /** Speed controller group for the motor controllers on the right. */
-  // private final SpeedControllerGroup rightMotorControllers = new SpeedControllerGroup(frontRight, backRight);
-
   /**
    * The differential drivetrain for the motors.
    * This is where most of the driving action is performed.
@@ -46,10 +38,10 @@ public class MotorSubsystem extends Subsystem {
 
   public MotorSubsystem() {
     ShuffleboardUtil.tab
-        .add("Differential Drive Train", drive)
+        .add("Mecanum Drive Train", drive)
         .withSize(4, 2)
         .withPosition(0, 0)
-        .withWidget(BuiltInWidgets.kDifferentialDrive);
+        .withWidget(BuiltInWidgets.kMecanumDrive);
   }
 
   // Put methods for controlling this subsystem
@@ -57,6 +49,6 @@ public class MotorSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-  // setDefaultCommand(new MySpecialCommand());
+    // setDefaultCommand(new MySpecialCommand());
   }
 }

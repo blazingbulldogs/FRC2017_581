@@ -35,10 +35,4 @@ public class RobotMap {
 
   /** Controller port. */
   public final static int controllerPort = 0;
-
-  /** The PCM channel to move the double solenoid in the forward direction. */
-  public final static int doubleSolenoidForwardChannel = 8;
-
-  /** The PCM channel to move the double solenoid in the reverse direction. */
-  public final static int doubleSolenoidReverseChannel = 9;
 }

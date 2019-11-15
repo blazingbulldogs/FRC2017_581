@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
     System.out.println("Robot ID: " + Config.id);
 
     // Log to Shuffleboard
-      ShuffleboardUtil.tab.add("Robot ID", Config.id).withPosition(0, 6).withWidget(BuiltInWidgets.kTextView);
+      ShuffleboardUtil.tab.add("Robot ID", Config.id).withPosition(5, 0).withWidget(BuiltInWidgets.kTextView);
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
@@ -121,8 +121,8 @@ public class Robot extends TimedRobot {
     /** Raw `x` value from the joystick. */
     final double x = Controls.driveJoystick.getRawAxis(RightJoystick.xAxis);
 
-    /** Negative `y` value from the joystick. */
-    final double y = -Controls.driveJoystick.getRawAxis(RightJoystick.yAxis);
+    /** Raw `y` value from the joystick. */
+    final double y = Controls.driveJoystick.getRawAxis(RightJoystick.yAxis);
 
     /** Raw `z` value from the joystick. */
     final double z = Controls.driveJoystick.getRawAxis(LeftJoystick.xAxis);

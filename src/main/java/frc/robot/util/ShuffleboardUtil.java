@@ -26,7 +26,7 @@ public final class ShuffleboardUtil {
   /** Graph of joystick values in the order of `x`, `y`, `z`. */
   private final NetworkTableEntry joystickData = tab
     .add("Joystick Output", new double[] { 0, 0, 0 })
-    .withPosition(11, 0)
+    .withPosition(6, 0)
     .withSize(2, 2)
     .withWidget(BuiltInWidgets.kGraph)
     .getEntry();
@@ -35,13 +35,15 @@ public final class ShuffleboardUtil {
   private final NetworkTableEntry joyX = tab
     .add("Raw Joystick X", 0)
     .withPosition(0, 2)
+    .withSize(2, 1)
     .withWidget(BuiltInWidgets.kNumberBar)
     .getEntry();
 
   /** Shuffleboard number bar for the joystick `y` value */
   private final NetworkTableEntry joyY = tab
-    .add("Negative Joystick Y", 0)
+    .add("Raw Joystick Y", 0)
     .withPosition(0, 3)
+    .withSize(2, 1)
     .withWidget(BuiltInWidgets.kNumberBar)
     .getEntry();
 
@@ -49,6 +51,7 @@ public final class ShuffleboardUtil {
   private final NetworkTableEntry joyZ = tab
     .add("Raw Joystick Z", 0)
     .withPosition(0, 4)
+    .withSize(2, 1)
     .withWidget(BuiltInWidgets.kNumberBar)
     .getEntry();
 
